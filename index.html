@@ -257,21 +257,40 @@ print(f"Report rate:     {report_rate:.1f}%")  # 31.7%
 <!-- ============ 4. PROJECT ============ -->
 <section class="page" id="project" aria-labelledby="pr-h">
   <p class="kicker">Project / Research Showcase</p>
-  <h2 id="pr-h">[Project Title]</h2>
-  <p class="lead">[One-sentence summary of the project and the question it answers.]</p>
+  <h2 id="pr-h">Microsoft 365 Security Assessment of a Small-Business Environment</h2>
+  <p class="lead">Applying CYSE 600 principles to evaluate the security of a typical small-business Microsoft 365 tenant and recommend risk-prioritized improvements.</p>
   <div class="card">
     <h3 style="margin-top:0">Overview</h3>
-    <div class="todo">Problem or question, scope, and methods/tools used (e.g., research, case study, security assessment, technical build).</div>
-    <h3>Findings / Work</h3>
-    <div class="todo">Your key results: screenshots, diagrams, tables, or a linked report/slide deck.</div>
-    <figure class="artifact">
-      <img src="assets/project-figure.png" alt="[Describe the figure]">
-      <figcaption>Figure 1. [Caption]. <a href="assets/project-report.pdf">Download full report (PDF)</a></figcaption>
+    <p><strong>Question:</strong> How well does a typical small-business Microsoft 365 environment protect confidentiality, integrity, and availability, and which improvements would reduce the most risk for the least effort?</p>
+    <p><strong>Scope:</strong> A representative 50-user tenant modeled on the kinds of environments I support as a Support Engineer. No real client data is used. The assessment covers identity and access, email security, endpoint management, and data sharing.</p>
+    <p><strong>Method:</strong> I reviewed the environment against the CIS Critical Security Controls (Center for Internet Security, 2021) and NIST guidance, mapped each finding to the CIA triad, and rated it using the likelihood × impact approach from NIST SP 800-30 (NIST, 2012). Recommendations were then organized by the NIST CSF 2.0 functions (NIST, 2024).</p>
+    <h3>Findings &amp; Recommendations</h3>
+    <figure class="artifact" style="overflow-x:auto">
+      <table style="border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem" aria-describedby="findCap">
+        <thead><tr style="text-align:left;border-bottom:2px solid var(--border)"><th style="padding:.5rem">#</th><th style="padding:.5rem">Finding</th><th style="padding:.5rem">CIA</th><th style="padding:.5rem">Risk</th><th style="padding:.5rem">Recommendation</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">1</td><td style="padding:.5rem">MFA not enforced for all users; legacy authentication still allowed</td><td style="padding:.5rem">C, I</td><td style="padding:.5rem"><strong style="color:#d62828">Critical</strong></td><td style="padding:.5rem">Enforce MFA with Conditional Access and block legacy authentication</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">2</td><td style="padding:.5rem">Five users hold Global Administrator, including daily-use accounts</td><td style="padding:.5rem">C, I, A</td><td style="padding:.5rem"><strong style="color:#d62828">Critical</strong></td><td style="padding:.5rem">Reduce to two dedicated admin accounts; assign least-privilege admin roles</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">3</td><td style="padding:.5rem">Former employees still in security groups months after departure</td><td style="padding:.5rem">C</td><td style="padding:.5rem"><strong style="color:#e07a1f">High</strong></td><td style="padding:.5rem">Standardize offboarding; run quarterly access reviews</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">4</td><td style="padding:.5rem">Email authentication (SPF, DKIM, DMARC) incomplete</td><td style="padding:.5rem">I</td><td style="padding:.5rem"><strong style="color:#e07a1f">High</strong></td><td style="padding:.5rem">Publish DKIM and DMARC records; move DMARC toward enforcement</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">5</td><td style="padding:.5rem">Some laptops unenrolled in Intune; patching inconsistent</td><td style="padding:.5rem">I, A</td><td style="padding:.5rem"><strong style="color:#e07a1f">High</strong></td><td style="padding:.5rem">Require enrollment and compliance policies before granting access</td></tr>
+          <tr><td style="padding:.5rem">6</td><td style="padding:.5rem">SharePoint links shared with "Anyone" by default</td><td style="padding:.5rem">C</td><td style="padding:.5rem"><strong style="color:#b08900">Medium</strong></td><td style="padding:.5rem">Default sharing to internal users; set expiration on external links</td></tr>
+        </tbody>
+      </table>
+      <figcaption id="findCap"><strong>Artifact:</strong> Assessment findings rated by likelihood and impact, mapped to the CIA triad, with a recommended control for each. Findings 1 and 2 are prioritized because they address how attackers most commonly gain and expand access.</figcaption>
     </figure>
+    <h3>Remediation Roadmap</h3>
+    <p><strong>Phase 1, first 30 days (Protect):</strong> enforce MFA, block legacy authentication, and reduce Global Administrators. <strong>Phase 2, 60 days (Identify &amp; Protect):</strong> fix offboarding, run the first access review, and complete Intune enrollment. <strong>Phase 3, 90 days (Detect &amp; Govern):</strong> enforce DMARC, tighten sharing defaults, and add these checks to a recurring monthly review.</p>
   </div>
   <div class="card" id="analysis">
     <h3 style="margin-top:0">Reflection &amp; Analysis <span class="wc" id="wc" aria-live="polite"></span></h3>
-    <div class="todo">Write your 500–800 word reflection/analysis here (the counter beside the heading checks the length for you). Cover: how the project synthesizes course concepts, what you discovered, limitations, and your own insight or recommendations. Cite sources in APA (Author, Year).</div>
+    <p>I chose a Microsoft 365 security assessment because it sits where my coursework and my job meet. Every day I configure parts of this environment one ticket at a time, but I had never stepped back to evaluate it as a whole system. This project asked a different question than my job usually does: not "how do I fix this?" but "how secure is this, and what should be fixed first?" Answering that required the principles from CYSE 600 rather than just technical skill.</p>
+    <p>The most important insight was how much of the environment's risk came from identity. Four of the six findings involved who could sign in and what they could do once inside: missing MFA, too many Global Administrators, stale accounts, and unmanaged devices reaching company data. This connects directly to the principle of least privilege (Saltzer &amp; Schroeder, 1975). Each excess privilege is not a problem until an account is compromised, and then it determines how far an attacker can go. A compromised standard user is an incident; a compromised Global Administrator can mean losing control of the entire tenant. Seeing the findings side by side made it clear that identity is the real perimeter in a cloud environment.</p>
+    <p>Rating the findings with likelihood and impact (NIST, 2012) changed how I would prioritize work. Without a framework, it is easy to fix whatever is most visible or easiest. A risk matrix forces the question of what would cause the most harm. Enforcing MFA and reducing administrator accounts ranked highest because both are likely targets and high impact, and both are relatively inexpensive to fix. That combination of high risk reduction and low cost is exactly what a small business with limited IT resources needs. Lower-priority items, such as sharing defaults, still matter, but they belong in a later phase.</p>
+    <p>Mapping each finding to the CIA triad also exposed something I had underestimated: availability. I usually think of security as protecting confidentiality, but unpatched devices and over-privileged accounts threaten availability too, through ransomware or a malicious administrator deleting data. The roadmap reflects that by treating patch compliance as a security control, not just routine maintenance, consistent with NIST's view of patching as preventive maintenance (Souppaya &amp; Scarfone, 2022).</p>
+    <p>The assessment also reinforced that technical controls alone are not enough. Several findings were really process failures. Stale accounts in security groups are not a configuration problem; they happen because offboarding is inconsistent. Likewise, MFA protects against stolen passwords, but users still need awareness training to recognize phishing attempts designed to steal MFA codes or trick them into approving sign-in prompts. That is why the roadmap pairs technical changes with recurring reviews and procedures. Defense in depth means layering people, process, and technology so that one failure does not lead to a breach.</p>
+    <p>This project has limitations. The environment is a composite based on my experience rather than a live audit, so the findings illustrate common patterns instead of measuring one organization. A real assessment would also include log analysis, interviews with staff, and testing of whether controls actually work as configured. Another limitation is that the risk ratings involve judgment; two analysts could reasonably rate the same finding differently. Documenting the reasoning behind each rating, as I did by mapping findings to the CIA triad and NIST guidance, makes those judgments transparent and open to review.</p>
+    <p>Professionally, this project gave me a repeatable method I can bring to work. Instead of only resolving tickets, I can periodically evaluate client environments against a framework such as the CIS Controls (Center for Internet Security, 2021), rank what I find, and present the results in terms leadership understands: risk, cost, and priority. That ability to translate technical issues into business decisions is what separates IT support from security work, and it is the step I want to take next in my career.</p>
   </div>
 </section>
 
@@ -303,6 +322,7 @@ print(f"Report rate:     {report_rate:.1f}%")  # 31.7%
   <p class="kicker">APA 7th Edition</p>
   <h2 id="rc-h">References</h2>
   <div class="card refs">
+    <p>Center for Internet Security. (2021). <em>CIS Critical Security Controls</em> (Version 8). https://www.cisecurity.org/controls/v8</p>
     <p>Grassi, P. A., Fenton, J. L., Newton, E. M., Perlner, R. A., Regenscheid, A. R., Burr, W. E., Richer, J. P., Lefkovitz, N. B., Danker, J. M., Choong, Y.-Y., Greene, K. K., &amp; Theofanos, M. F. (2017). <em>Digital identity guidelines: Authentication and lifecycle management</em> (NIST Special Publication 800-63B). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.SP.800-63b</p>
     <p>National Institute of Standards and Technology. (2012). <em>Guide for conducting risk assessments</em> (NIST Special Publication 800-30, Rev. 1). https://doi.org/10.6028/NIST.SP.800-30r1</p>
     <p>National Institute of Standards and Technology. (2024). <em>The NIST Cybersecurity Framework (CSF) 2.0</em> (NIST Cybersecurity White Paper 29). https://doi.org/10.6028/NIST.CSWP.29</p>
