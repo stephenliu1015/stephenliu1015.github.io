@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name | ePortfolio</title>
+<meta name="description" content="Professional ePortfolio for [Course Name], [Term].">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --text:#1c2430; --muted:#5a6575;
+  --primary:#1f3a5f; --accent:#2a9d8f; --border:#e3e7ec;
+  --todo-bg:#fff7e0; --todo-border:#e9b949;
+  --radius:12px; --max:1040px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --text:#e6ebf1; --muted:#9aa6b5;
+    --primary:#8fb3e0; --accent:#4fc3b4; --border:#2a3440;
+    --todo-bg:#2e2814; --todo-border:#a3842f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --text:#e6ebf1; --muted:#9aa6b5;
+  --primary:#8fb3e0; --accent:#4fc3b4; --border:#2a3440;
+  --todo-bg:#2e2814; --todo-border:#a3842f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25;color:var(--primary)}
+h1{font-size:clamp(2rem,5vw,2.9rem);margin:.2em 0}
+h2{font-size:clamp(1.6rem,3.5vw,2.1rem);margin:0 0 .4em}
+h3{font-size:1.25rem;margin:1.4em 0 .4em}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+img{max-width:100%;height:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--primary);color:#fff;padding:.6rem 1rem;z-index:100}
+.skip:focus{left:1rem}
+
+/* Header / nav */
+header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border)}
+.nav{max-width:var(--max);margin:auto;display:flex;align-items:center;justify-content:space-between;padding:.75rem 16px;gap:1rem}
+.brand{font-weight:700;color:var(--primary);text-decoration:none;font-size:1.05rem}
+.nav ul{list-style:none;display:flex;gap:.25rem;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{display:block;padding:.45rem .75rem;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem}
+.nav ul a:hover{background:var(--bg);color:var(--text)}
+.nav ul a[aria-current="page"]{background:var(--primary);color:var(--surface)}
+.menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.4rem .7rem;font:inherit;cursor:pointer}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  .nav{flex-wrap:wrap}
+  .nav ul{display:none;width:100%;flex-direction:column}
+  .nav ul.open{display:flex}
+}
+
+/* Layout */
+main{max-width:var(--max);margin:auto;padding:2.5rem 16px 4rem}
+section.page{animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.js section.page{display:none}
+.js section.page.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.25rem 0}
+.lead{font-size:1.15rem;color:var(--muted);max-width:65ch}
+.kicker{text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;font-weight:600;color:var(--accent)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:center}
+.hero img{width:220px;height:220px;object-fit:cover;border-radius:50%;border:4px solid var(--surface);box-shadow:0 4px 20px rgba(0,0,0,.08);background:var(--border)}
+@media (max-width:640px){.hero{grid-template-columns:1fr;text-align:center}.hero img{margin:auto;width:170px;height:170px}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.tile{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:var(--accent)}
+.tile strong{display:block;color:var(--primary);margin-bottom:.25rem}
+.tile span{color:var(--muted);font-size:.92rem}
+
+/* Buttons */
+.btn{display:inline-block;background:var(--primary);color:var(--surface);padding:.6rem 1.1rem;border-radius:8px;text-decoration:none;font-weight:600}
+.btn.alt{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+
+/* Topic layout */
+.topic-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+.topic-nav a{padding:.35rem .8rem;border:1px solid var(--border);border-radius:999px;text-decoration:none;font-size:.9rem;color:var(--muted)}
+.artifact{border-left:4px solid var(--accent);padding:.75rem 1rem;background:var(--bg);border-radius:0 8px 8px 0;margin:1rem 0}
+.artifact figcaption{font-size:.9rem;color:var(--muted);margin-top:.5rem}
+.outcome{display:inline-block;font-size:.8rem;font-weight:600;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.15rem .5rem;color:var(--primary)}
+pre{background:#0f1720;color:#e6ebf1;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.88rem}
+
+/* Placeholders: delete the .todo blocks once you've added your content */
+.todo{background:var(--todo-bg);border:2px dashed var(--todo-border);border-radius:8px;padding:.75rem 1rem;margin:.75rem 0}
+.todo::before{content:"✎ Replace: ";font-weight:700}
+.wc{font-size:.85rem;color:var(--muted);font-weight:600}
+
+/* References */
+.refs p{padding-left:2em;text-indent:-2em;margin:.6em 0}
+
+footer{border-top:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:.9rem}
+footer .inner{max-width:var(--max);margin:auto;padding:1.25rem 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#home">Your Name</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#knowledge">Core Knowledge</a></li>
+      <li><a href="#project">Project Showcase</a></li>
+      <li><a href="#reflections">Learning Reflections</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============ 1. HOME ============ -->
+<section class="page" id="home" aria-labelledby="home-h">
+  <div class="hero">
+    <img src="assets/profile.jpg" alt="Professional headshot of Your Name">
+    <div>
+      <p class="kicker">[Course Code &amp; Name] · [Term, e.g., Fall 2026]</p>
+      <h1 id="home-h">Your Name</h1>
+      <p class="lead">Welcome to my ePortfolio.</p>
+      <div class="todo">Write a 2–3 sentence mission statement: what this portfolio shows, what you care about in this field, and where you're headed.</div>
+      <p><a class="btn" href="#knowledge">Explore my work</a> <a class="btn alt" href="#about">About me</a></p>
+    </div>
+  </div>
+  <div class="tiles">
+    <a class="tile" href="#about"><strong>About Me</strong><span>Background, interests, career goals, and résumé</span></a>
+    <a class="tile" href="#knowledge"><strong>Core Knowledge</strong><span>Three core course topics with artifacts</span></a>
+    <a class="tile" href="#project"><strong>Project Showcase</strong><span>An in-depth project with written analysis</span></a>
+    <a class="tile" href="#reflections"><strong>Learning Reflections</strong><span>Growth, challenges, and next steps</span></a>
+  </div>
+</section>
+
+<!-- ============ 2. ABOUT ============ -->
+<section class="page" id="about" aria-labelledby="about-h">
+  <p class="kicker">Professional Bio</p>
+  <h2 id="about-h">About Me</h2>
+  <div class="card">
+    <h3>Background</h3>
+    <div class="todo">Your major, year, school, relevant work/military/volunteer experience, certifications.</div>
+    <h3>Interests</h3>
+    <div class="todo">Areas of the field you're drawn to and why (be specific: name the topics).</div>
+    <h3>Career Goals</h3>
+    <div class="todo">Short-term goal (e.g., internship or role) and long-term goal; link it to what you learned in this course.</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Résumé</h3>
+    <p>Download a copy of my current résumé.</p>
+    <p><a class="btn" href="assets/resume.pdf" download>Download résumé (PDF)</a></p>
+  </div>
+</section>
+
+<!-- ============ 3. CORE KNOWLEDGE ============ -->
+<section class="page" id="knowledge" aria-labelledby="kn-h">
+  <p class="kicker">Core Knowledge</p>
+  <h2 id="kn-h">Core Course Topics</h2>
+  <p class="lead">Three key topics from the course, with my understanding, real-world applications, and supporting artifacts.</p>
+  <div class="topic-nav" aria-label="Jump to topic">
+    <a href="#knowledge" data-jump="t1">Topic 1</a><a href="#knowledge" data-jump="t2">Topic 2</a><a href="#knowledge" data-jump="t3">Topic 3</a>
+  </div>
+
+  <article class="card" id="t1">
+    <h3 style="margin-top:0">Topic 1: [Topic Name]</h3>
+    <span class="outcome">Course outcome: [e.g., CLO 2 – …]</span>
+    <h3>My Understanding</h3>
+    <div class="todo">1–2 paragraphs explaining the concept in your own words. Show depth: why it matters, not just what it is.</div>
+    <h3>Examples &amp; Applications</h3>
+    <div class="todo">A real-world example, news event, or case where this concept applies, plus how you'd use it professionally.</div>
+    <figure class="artifact">
+      <img src="assets/topic1-artifact.png" alt="[Describe what the artifact image shows]">
+      <figcaption><strong>Artifact:</strong> [Title]. [1–2 sentences: what it is and what it demonstrates about this topic.] <a href="assets/topic1-artifact.pdf">View full artifact</a></figcaption>
+    </figure>
+  </article>
+
+  <article class="card" id="t2">
+    <h3 style="margin-top:0">Topic 2: [Topic Name]</h3>
+    <span class="outcome">Course outcome: [ … ]</span>
+    <h3>My Understanding</h3>
+    <div class="todo">Your explanation of the concept.</div>
+    <h3>Examples &amp; Applications</h3>
+    <div class="todo">Example and application.</div>
+    <figure class="artifact">
+      <pre><code># Example code snippet or command output artifact
+# Replace with your own work and annotate it
+</code></pre>
+      <figcaption><strong>Artifact:</strong> [Title]. [What it shows and why it matters.]</figcaption>
+    </figure>
+  </article>
+
+  <article class="card" id="t3">
+    <h3 style="margin-top:0">Topic 3: [Topic Name]</h3>
+    <span class="outcome">Course outcome: [ … ]</span>
+    <h3>My Understanding</h3>
+    <div class="todo">Your explanation of the concept.</div>
+    <h3>Examples &amp; Applications</h3>
+    <div class="todo">Example and application.</div>
+    <figure class="artifact">
+      <img src="assets/topic3-artifact.png" alt="[Describe the infographic or slide]">
+      <figcaption><strong>Artifact:</strong> [Title]. [What it shows.] Tip: use a different artifact type for each topic (essay, infographic, code, slides) for the "diverse artifacts" rubric row.</figcaption>
+    </figure>
+  </article>
+</section>
+
+<!-- ============ 4. PROJECT ============ -->
+<section class="page" id="project" aria-labelledby="pr-h">
+  <p class="kicker">Project / Research Showcase</p>
+  <h2 id="pr-h">[Project Title]</h2>
+  <p class="lead">[One-sentence summary of the project and the question it answers.]</p>
+  <div class="card">
+    <h3 style="margin-top:0">Overview</h3>
+    <div class="todo">Problem or question, scope, and methods/tools used (e.g., research, case study, security assessment, technical build).</div>
+    <h3>Findings / Work</h3>
+    <div class="todo">Your key results: screenshots, diagrams, tables, or a linked report/slide deck.</div>
+    <figure class="artifact">
+      <img src="assets/project-figure.png" alt="[Describe the figure]">
+      <figcaption>Figure 1. [Caption]. <a href="assets/project-report.pdf">Download full report (PDF)</a></figcaption>
+    </figure>
+  </div>
+  <div class="card" id="analysis">
+    <h3 style="margin-top:0">Reflection &amp; Analysis <span class="wc" id="wc" aria-live="polite"></span></h3>
+    <div class="todo">Write your 500–800 word reflection/analysis here (the counter beside the heading checks the length for you). Cover: how the project synthesizes course concepts, what you discovered, limitations, and your own insight or recommendations. Cite sources in APA (Author, Year).</div>
+  </div>
+</section>
+
+<!-- ============ 5. REFLECTIONS ============ -->
+<section class="page" id="reflections" aria-labelledby="rf-h">
+  <p class="kicker">Learning Reflections</p>
+  <h2 id="rf-h">What I Learned</h2>
+  <div class="todo">Opening summary paragraph: the big takeaways from this course.</div>
+  <div class="card">
+    <h3 style="margin-top:0">1. My Growth &amp; Development</h3>
+    <div class="todo">Where you started vs. where you are now. Point to a specific artifact as evidence.</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">2. A Challenge I Overcame</h3>
+    <div class="todo">A specific obstacle, what you tried, what worked, and what it taught you.</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">3. Applying What I've Learned</h3>
+    <div class="todo">Concrete plans: a job, internship, certification, future course, or personal project where you'll use these skills.</div>
+  </div>
+</section>
+
+<!-- ============ 6. REFERENCES ============ -->
+<section class="page" id="references" aria-labelledby="rc-h">
+  <p class="kicker">APA 7th Edition</p>
+  <h2 id="rc-h">References</h2>
+  <div class="card refs">
+    <p>Author, A. A., &amp; Author, B. B. (Year). <em>Title of book in sentence case</em>. Publisher.</p>
+    <p>Author, A. A. (Year). Title of article. <em>Journal Name, Volume</em>(Issue), pages. https://doi.org/xxxx</p>
+    <p>Organization Name. (Year, Month Day). <em>Title of web page</em>. Site Name. https://url</p>
+    <p>Creator, A. (Year). <em>Title of image</em> [Photograph/Infographic]. Source. https://url</p>
+    <div class="todo">Replace the examples above with every source, image, and icon you used. List them alphabetically.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <span>© <span id="yr">2026</span> Your Name · [Course Name], [Term]</span>
+    <span><a href="mailto:you@example.edu">you@example.edu</a> · <a href="https://www.linkedin.com/">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  var links=[].slice.call(document.querySelectorAll('#menu a'));
+  var menu=document.getElementById('menu'), btn=document.querySelector('.menu-btn');
+  function show(){
+    var id=(location.hash||'#home').slice(1);
+    if(!document.getElementById(id)||!document.getElementById(id).classList.contains('page')) id='home';
+    pages.forEach(function(p){p.classList.toggle('active',p.id===id)});
+    links.forEach(function(a){ if(a.getAttribute('href')==='#'+id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    menu.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+    var h=document.querySelector('section.page.active h1, section.page.active h2'); if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true});}
+  }
+  window.addEventListener('hashchange',show); show();
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+  [].forEach.call(document.querySelectorAll('[data-jump]'),function(a){
+    a.addEventListener('click',function(e){e.preventDefault();document.getElementById(a.dataset.jump).scrollIntoView({behavior:'smooth'})});
+  });
+  // Word counter for the 500–800 word project reflection (ignores the yellow placeholder box)
+  var box=document.getElementById('analysis'), wc=document.getElementById('wc');
+  var txt=[].slice.call(box.querySelectorAll('p')).map(function(p){return p.textContent}).join(' ').trim();
+  var n=txt?txt.split(/\s+/).length:0;
+  if(n) wc.textContent='('+n+' words'+(n<500||n>800?' — target 500–800':'')+')';
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
